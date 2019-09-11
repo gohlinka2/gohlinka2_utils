@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">gohlinka2-utils</string>
+    <string name="an_error_occurred_please_try_again_later">Vyskytla se chyba, zkuste to prosím později.</string>
+    <string name="close">Zavřít</string>
+    <string name="error">Chyba</string>
+</resources>
