@@ -1,5 +1,5 @@
-# gohlinka2_utils
-Several utility classes that I like to use in my projects.
+# gohlinka2_utils for Android
+Several utility classes that I like to use in my Android projects.
 
 ## [BaseFragment](gohlinka2-utils2/src/main/java/cz/hlinkapp/gohlinka2_utils2/fragments/BaseFragment.kt)
 A base Fragment class containing several utilities, such as methods for handling the included dialogs.
