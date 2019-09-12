@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * A simple helper class for saving and reading values from shared preferences.
+ * A simple helper class for saving and reading predefined values from shared preferences.
  */
 @Singleton
 class SharedPrefUtil
@@ -16,7 +16,7 @@ class SharedPrefUtil
 @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     /**
-     * Saves any string shared preference using the provided key.
+     * Reads any string shared preference with the provided key, or null if not found.
      */
     fun getStringSharedPref(key: String) : String?{
         return sharedPreferences.getString(key,null)
