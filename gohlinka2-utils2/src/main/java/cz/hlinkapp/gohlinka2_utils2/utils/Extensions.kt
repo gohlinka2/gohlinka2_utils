@@ -4,8 +4,13 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import java.util.*
 
 
@@ -76,4 +81,42 @@ fun View.setGone() {
  */
 fun Intent.resolveActivityOrNull(pm: PackageManager?) : ComponentName? {
     return if (pm != null) this.resolveActivity(pm) else null
+}
+
+/**
+ * Resets this Calendar to the first millisecond of the day set.
+ */
+fun Calendar.resetToStartOfDay() {
+    set(Calendar.HOUR_OF_DAY,0)
+    set(Calendar.MINUTE,0)
+    set(Calendar.SECOND,0)
+    set(Calendar.MILLISECOND,0)
+}
+
+/**
+ * Returns a timestamp of the start of the current day.
+ */
+fun getStartOfDayTimestamp() : Long {
+    val cal = Calendar.getInstance()
+    cal.resetToStartOfDay()
+    return cal.timeInMillis
+}
+
+/**
+ * Returns a [CoordinatorLayout] behavior of this view.
+ * From https://github.com/Semper-Viventem/Material-backdrop/blob/master/README.md
+ */
+fun <T : CoordinatorLayout.Behavior<*>> View.findBehavior(): T = layoutParams.run {
+    require(this is CoordinatorLayout.LayoutParams) { "View's layout params should be CoordinatorLayout.LayoutParams" }
+    (layoutParams as CoordinatorLayout.LayoutParams).behavior as? T ?: throw IllegalArgumentException("Layout's behavior is not current behavior")
+}
+
+/**
+ * Returns the fragment that is currently displayed in this ViewPager.
+ * Note that this will only work if this ViewPager's adapter is a subclass of [FragmentPagerAdapter], and it will crash otherwise.
+ * @param supportFragmentManager is needed for this to work
+ */
+fun ViewPager.getCurrentFragment(supportFragmentManager: FragmentManager) : Fragment? {
+    require(this.adapter is FragmentPagerAdapter)
+    return supportFragmentManager.findFragmentByTag("android:switcher:${this.id}:${this.currentItem}")
 }
