@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
 
 
@@ -120,3 +122,8 @@ fun ViewPager.getCurrentFragment(supportFragmentManager: FragmentManager) : Frag
     require(this.adapter is FragmentPagerAdapter)
     return supportFragmentManager.findFragmentByTag("android:switcher:${this.id}:${this.currentItem}")
 }
+
+/**
+ * Converts the [json] string to [T].
+ */
+inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
